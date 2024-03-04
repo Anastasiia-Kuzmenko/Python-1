@@ -142,3 +142,4 @@ birds.add('Peacok')
 print('Update birds: ', birds)
 all_animals = predators | birds | herbivores
 print(all_animals)
+
