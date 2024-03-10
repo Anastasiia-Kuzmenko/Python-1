@@ -296,27 +296,75 @@ del winner_physics
 # {‘interface’: ‘Ethernet1’, ‘ip’: ‘2.2.2.2’, ‘status’: ‘down’},
 # {‘interface’: ‘Serial0’, ‘ip’: ‘3.3.3.3’, ‘status’: ‘up’},
 # {‘interface’: ‘Serial1’, ‘ip’: ‘4.4.4.4’, ‘status’: ‘up’}].
+
+dict_1 = [{'interface': 'Ethernet0', 'ip': '1.1.1.1', 'status': 'up'},
+          {'interface': 'Ethernet1', 'ip': '2.2.2.2', 'status': 'down'},
+          {'interface': 'Serial0', 'ip': '3.3.3.3', 'status': 'up'},
+          {'interface': 'Serial1', 'ip': '4.4.4.4', 'status': 'up'}]
+
 #a.	выведите на экран общее количество интерфейсов
+print('interfaces: ', len(dict_1))
+
 #b.	выведите на экран информацию (название, ip-адрес и статус), соответствующую второму интерфейсу в списке
+print('The second interface: ', dict_1[1])
+
 #c.	выведите на экран статус последнего интерфейса в списке
+print('Status: ', dict_1[-1])
+
 #d.	проверьте, добавлена ли графа ‘notes’ для первого интерфейса и выведите ее содержимое на экран. Если такой графы нет,
 # то сперва добавьте ее с текстом “need to reset”
+dict_1[0].setdefault('notes', 'need to reset')
+print(dict_1[0])
+
 #e.	добавьте в список еще один ethernet интерфейс с ip-адресом, как у третьего интерфейса, и статусом ‘down’.
 # После этого измените ip-адрес третьего интерфейса на ‘3.3.3.4’
+dict_1.append({'interface': 'Ethernet2', 'ip': dict_1[2]['ip'], 'status': 'down'})
+dict_1[2]['ip'] = '3.3.3.4'
+print(dict_1)
+
 #f.	выведите на экран содержимое графы ‘notes’ первого интерфейса, а затем удалите ее
+print(dict_1[0].pop('notes'))
+print(dict_1)
+
 #g.	переведите четвертый интерфейс в состояние ‘down’, а затем удалите его из списка
-
-
+dict_1[3]['status'] = 'down'
+print(dict_1[3])
+del dict_1[3]
+print(dict_1)
 
 #2.	Дан список товаров и их цены: {‘smart watch’: 550, ‘phone’: 1000, ‘playstation’: 500,
 # ‘laptop’: 1550, ‘music player’: 600, ‘tablet’: 400}.
+from math import ceil
+t = {'smart watch': 550, 'phone': 1000, 'playstation': 500, 'laptop': 1550, 'music player': 600, 'tablet': 400}
+
 #a.	выведите на экран общую стоимость всех товаров
+print('Common cost: ', sum(t.values()))
+
 #b.	выведите на экран названия товаров в алфавитном порядке, а затем наоборот
+t_names = t.keys()
+print(sorted(t_names))
+print(sorted(t_names, reverse=True))
+
 #c.	все музыкальные плееры кроме одного были распроданы, поэтому на последний экземпляр магазин решил сделать 50% скидку.
 # Внесите соответствующие изменения в список товаров.
+t['music player'] = int(t['music player'] * 0.5)
+print(t)
+
 #d.	сколько планшетов необходимо продать магазину, чтобы превысить выручку,
 # полученную от продажи пяти телефонов и трех ноутбуков?
+sum = 5 * t['phone'] + 3 * t['laptop']
+print(sum)
+tablet_count = ceil(sum / t['tablet'])
+print(tablet_count)
+print(sum, tablet_count, tablet_count * t['tablet'])
+
 #e.	магазин решил провести лотерею среди своих постоянных покупателей.
 # Выберите произвольным образом приз для победителя лотереи, а затем удалите его из списка.
+prize = t.popitem()
+print('Prize: ', prize)
+print(t)
+
 #f.	в магазин поступило несколько новых устройств: ‘iphone’ - 1300, ‘music player’ - 850,
 # ‘headphones’ - 200. Обновите список товаров и их цены.
+t.update({'iphone': 1300, 'music player': 850, 'headphones': 200})
+print(t)
