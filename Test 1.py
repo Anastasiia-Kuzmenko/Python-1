@@ -368,3 +368,8 @@ print(t)
 # ‘headphones’ - 200. Обновите список товаров и их цены.
 t.update({'iphone': 1300, 'music player': 850, 'headphones': 200})
 print(t)
+
+result = 0
+for i in range(100):
+    result += i
+    print(result)
