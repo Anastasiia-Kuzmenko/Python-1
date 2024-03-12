@@ -112,3 +112,78 @@ else:
     x2 = sqrt(fabs(D))/(2 * A1)
     print(complex(x1, x2), complex(x1, -x2))
 
+#	Отредактируйте решение задачи о паролях из контрольной работы таким образом,
+#	чтобы программа после выполнения всех проверок выводила бы на экран сообщение о том,
+#	является ли пароль безопасным.  Критерии безопасности пароля:
+#a.	длина пароля не менее 5 символов
+#b.	содержит буквы латинского алфавита как в верхнем, так и в нижнем регистре: A-Z, a-z
+#c.	содержит цифры от 0 до 9
+#d.	содержит хотя бы один из символов: @, #, %, &
+
+password = 'bdfjkjdA6'
+cond1 = len(password) >= 5
+cond2 = not password.islower() and not password.isupper()
+cond3 = len({'1', '2', '3', '4', '5', '6', '7', '8', '9', '0'} & set(password)) > 0
+cond4 = len({'@', '#', '%', '&'} & set(password)) > 0
+if cond1 and cond2 and cond3 and cond4:
+    print('Password is true')
+else:
+    print('Password is wrong')
+
+#	Решите предыдущую задачу для случая, когда пароль считается безопасным при выполнении хотя бы трех критериев из списка.
+password = 'bdfjkjd6'
+criteria_met = 0
+cond1 = len(password) >= 5
+cond2 = not password.islower() and not password.isupper()
+cond3 = len({'1', '2', '3', '4', '5', '6', '7', '8', '9', '0'} & set(password)) > 0
+cond4 = len({'@', '#', '%', '&'} & set(password)) > 0
+if cond1:
+    criteria_met += 1
+if cond2:
+    criteria_met += 1
+if cond3:
+    criteria_met += 1
+if cond4:
+    criteria_met += 1
+
+if criteria_met >= 3:
+    print('Password is metch')
+else:
+    print('Pasword non metch')
+
+#	Напишите программу расчета “человеческого” возраста для собаки. Расчет должен производиться следующим образом:
+# первые два года жизни каждый год эквивалентен 10.5 человеческим годам,
+# далее каждый год может быть приравнен к 4 человеческим годам.
+
+dog_age = 5
+if dog_age <= 2:
+    human_age = dog_age * 10.5
+else:
+    human_age = 21 + (dog_age - 2) * 4
+print("Human age:", human_age, "year")
+
+#	В магазине продаются следующие товары:
+#	smart watch ($600), phone ($1000),
+#	playstation ($450), laptop ($1550),
+#	music player ($400) и tablet ($400).
+#	Майкл хочет сделать подарок родителям.
+#	В магазине проводится акция: если он купит товары на $1000,
+#	то любой следующий товар он получит со скидкой 30%.
+#	У Майкла есть $1300. Хватит ли у него денег, чтобы купить музыкальный плеер маме, у
+#	мные часы папе и плейстейшн себе?
+
+shop = {'smart watch': 600, 'phone': 1000, 	'playstation': 450, 'laptop': 1550, 'music player': 400, 'tablet': 400}
+mike_have = 1300
+total_cost = shop['smart watch'] + shop['music player'] + shop['tablet']
+
+if total_cost >= 1000:
+    total_cost += (shop['tablet'] * 0.7)
+if mike_have >= total_cost:
+     print("Mike can")
+else:
+     print("Mike dont have enaf money")
+
+
+
+
+
