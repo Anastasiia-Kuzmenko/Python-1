@@ -85,3 +85,25 @@ for i in range(len(v)):
 
 if not found_combination:
     print('combination not found')
+
+#Перепишите программу проверки надежности пароля из предыдущего урока,
+# ограничив количество попыток ввода пароля. Если за три попытки пароль
+# так и не был установлен, вывести соответствующее сообщение на экран.
+
+name = input('name: ')
+attempts = 3
+
+while attempts > 0:
+    psw = input('Input password: ')
+    if len(psw) < 8:
+        print('Wrong password')
+    elif name in psw:
+        print('Password mast not metch wit name')
+    else:
+        print('Password is correct!')
+        break
+    attempts -= 1
+    if attempts == 0:
+        print('Count is over')
+
+
