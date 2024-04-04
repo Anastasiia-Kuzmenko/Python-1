@@ -92,7 +92,7 @@ s = 'green-red-yellow-black-white'
 def transform_str(s):
     l = s.split('-')
     print(l)
-    l.sotr()
+    l.sort()
     print(l)
     return '-'.join(l)
 print(transform_str(s))
@@ -103,4 +103,81 @@ print(transform_str(s))
 #Тема 2: “Аргументы функции”
 #Написать функцию, которая принимает произвольное число чисел, вычисляет
 # их среднее арифметическое и возвращает только те числа, которые меньше полученного среднего арифметического.
+
+def count(*args):
+    k = [] #сохраняем в эту переменную подходящие нам числа
+    sr_arifm = sum(args)/len(args)
+    print(sr_arifm)
+    for num in args:
+        if num<sr_arifm:
+            k.append(num) #добавляем в нашу последовательность подходящие числа
+    return k
+print(count(1, 2, 3, 4, 5, 6, 7, 8, 9))
+
+
+#Написать функцию, которая принимает произвольное число чисел и
+# преобразовывает их таким образом, чтобы цифры каждого числа
+# (по умолчанию) были записаны в обратном порядке. Предусмотреть
+# возможность по запросу пользователя выполнять преобразования
+# только над нечетными числами.
+def revers_num(n):
+    s = str(n)
+    return int(s[::-1])
+def m(*args, only_odd=False):
+    res = []
+    for i in args:
+        if not only_odd or (only_odd and i%2 != 0):
+            res.append(revers_num(i))
+    return res
+print(m(12, 2345, 323, 4456, 5687, 62, 734, 81, 91))
+print(m(12, 2345, 323, 4456, 5687, 62, 734, 81, 91, only_odd=True))
+
+#Написать функцию, принимающую некоторую информацию о
+# сотруднике и выводящую ее на экран согласно следующему
+# шаблону:
+"""
+имя
+фамилия
+пустая строка (в случае наличия других полей)
+		другие поля в алфавитном порядке их заголовков
+		разделитель, состоящий из записанных подряд 30-ти дефисов “-”.
+	
+Например:
+	Name: Anna
+	Last Name: Minker
+	
+	Age: 27
+	Phone: 123456789
+	------------------------------
+	Name: John
+	Last Name: Bold
+	
+	Age: 32
+	Country: USA
+	Email: john.bold.@mail.com
+	Phone: 987654321
+
+Если переданная информация не содержит имени или 
+фамилии сотрудника, вывести сообщение об ошибке.
+"""
+def print_info(**kwargs):
+    if 'name' not in kwargs or 'surname' not in kwargs:
+        print('invalid data')
+        return None
+    print('Name: ', kwargs['name'])
+    print('Last name: ', kwargs['surname'])
+    if len(kwargs)>2:
+        print()
+        key = list(kwargs.keys())[2:]
+        key.sort()
+        for k in key:
+            print(k, ': ', kwargs[k])
+    print('-'*30)
+print_info(name='Anna', surname='Minker', age=27, phone=23132)
+
+
+
+
+
+
 
