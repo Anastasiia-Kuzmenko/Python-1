@@ -47,7 +47,7 @@ def cylinder(R, h, full_area=True):
     return s
 
 
-R = 7
-h = 5
+R = 9
+h = 7
 print("Lateral surface area:", cylinder(R, h, full_area=False))
 print("Total area of the cylindre:", cylinder(R, h))
