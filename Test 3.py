@@ -176,8 +176,156 @@ def print_info(**kwargs):
 print_info(name='Anna', surname='Minker', age=27, phone=23132)
 
 
+#Тема 3: “Анонимные функции”
+#Дана последовательность чисел. Удалите из нее все положительные числа.
+# Вычислите сумму отрицательных чисел и напечатайте ее абсолютное значение.
+# Решите задачу с использованием lambda-функций.
+j = [1, -45, 87, -1, 67, -45, 12, 11]
+j = list(filter(lambda i: i<0, j))
+print(j)
+print(abs(sum(j)))
+
+#Дан список имен. Найдите сумму длин имен списка после удаления всех имен,
+# начинающихся с маленькой буквы. Решите задачу с использованием lambda-функций.
+
+names = ['Alex', 'Miron', 'Andy', 'Ivan', 'Maksym', 'kolya', 'kostya', 'olya', 'Katya', 'mikle']
+names = list(filter(lambda name: name[0].isupper(), names))
+print(names)
+res = 0
+for n in names:
+    res += len(n)
+print(res)
+
+#Преобразуйте заданную последовательность чисел таким образом,
+# чтобы каждый элемент новой последовательности был равен произведению
+# соответствующего элемента исходной последовательности и его порядкового
+# номера, возведенного в куб. Решите задачу с использованием lambda-функций.
+
+o = [1, 45, 87, 1, 67, 12, 11]
+result = list(map(lambda elem: elem*o.index(elem)**3, o))
+print(result)
+
+#Дан список городов. Сгенерируйте еще один список,
+# содержащий количество вхождений букв ‘a’ и ‘A’ в
+# название каждого города. Решите задачу с использованием lambda-функций.
+
+citys = ['Dnipro', 'Kyiv', 'Milan', 'Viena', 'Paris', 'London']
+res_1 = list(map(lambda elem: elem.count('a')+elem.count('A'), citys))
+print(res_1)
+
+#Дан список игроков команды, причем для каждого игрока указаны его имя,
+# фамилия и игровой рейтинг (по шкале от 1 до 10, где 10 - наивысший балл).
+# Отсортируйте список игроков по фамилии, а затем по их рейтингу от лучшего
+# к худшему и наоборот. Решите задачу с использованием lambda-функций.
+
+team = [{'name': 'Antony', 'last name': 'Bloom', 'raiting': 9},
+        {'name': 'Alon', 'last name': 'Riddler', 'raiting': 10},
+        {'name': 'Greg', 'last name': 'Mc Queen', 'raiting': 4},
+        {'name': 'Michael', 'last name': 'Andres', 'raiting': 6}]
+
+res_0 = sorted(team, key=lambda item: item['last name'])
+print(res_0)
+raiting_team = sorted(team, key=lambda item: item['raiting'], reverse=True )
+print(raiting_team)
+raiting_team = sorted(team, key=lambda item: item['raiting'])
+print(raiting_team)
+
+#Тема 4: “Рекурсивные функции”
+#Напишите рекурсивную функцию, вычисляющую сумму чисел
+# следующей последовательности:
+#n + (n-2) + (n-4) ….  (n-x)
+
+def foo(n):
+    if n<=0:
+        return 0
+    return n+foo(n-2)
+print(foo(6))
+
+#Написать рекурсивную функцию, вычисляющую сумму элементов списка,
+# элементы которого также могут быть списком.
+# Например, для списка [1, 2, [3, 4], [5, 6]] сумма элементов равна 21.
+
+l = [1, 2, [3, 4], [5, 6]]
+def foo(l):
+    s = 0
+    for elem in l:
+        if type(elem) is list:
+            s += foo(elem)
+        else:
+            s += elem
+    return s
+print(foo(l))
+
+#Написать рекурсивную функцию поиска максимального элемента
+# числовой последовательности.
+
+l = [4, 6, 7, 8, 90, 65, 111]
+def foo(l):
+    if len(l)>1:
+        return max(l[0], foo(l[1:]))
+    else:
+        return l[0]
+print(foo(l))
+
+#Тема 5: “Область видимости переменных”
+#Напишите функцию, ведущую подсчет количества посещений указанного города.
+# Функция должна принимать в качестве аргумента название города и возвращать
+# некоторую внутреннюю функцию, которая каждый раз при ее вызове будет
+# увеличивать счетчик посещений на 1. При решении задачи используйте нелокальную
+# область видимости.
+
+def foo(city):
+    s = 0
+    def incr():
+        nonlocal s
+        s += 1
+        print(city, s)
+    return incr()
+res1 = foo('Dnipro')
 
 
+res2 = foo('Kyiv')
 
 
+#Написать функцию, вычисляющую площадь прямоугольного параллелепипеда с ребрами a, b и c.
+# Данная функция должна содержать внутри себе еще одну функцию, вычисляющую площадь прямоугольника.
+# Решить задачу для случаев, когда общая площадь определена как глобальная и как локальная переменная.
+# Внести изменения в функции таким образом, чтобы общая площадь могла использоваться как нелокальная переменная.
+
+#локальная переменная
+
+def rect_paral_square(a, b, c):
+    def rect_square(i, j):
+        return i*j
+    s = 2*(rect_square(a, b) + rect_square(a, c) + rect_square(c, b))
+    return s
+print(rect_paral_square(2, 4, 6))
+
+#глобальная переменная
+s = 0
+def rect_paral_square(a, b, c):
+    def rect_square(i, j):
+        return i*j
+    global s
+    s = 2*(rect_square(a, b) + rect_square(a, c) + rect_square(c, b))
+    return s
+rect_paral_square(2, 4, 6)
+print(s)
+
+#нелокальная переменная
+
+def rect_paral_square(a, b, c):
+    s = 0
+    def add_rect_square(i, j):
+        nonlocal s
+        s += i*j
+
+
+    add_rect_square(a, b)
+    add_rect_square(a, c)
+    add_rect_square(c, b)
+    return 2*s
+
+
+print(rect_paral_square(2, 4, 6))
 
