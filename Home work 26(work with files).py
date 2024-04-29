@@ -54,8 +54,16 @@ with open('nums.dat', 'r') as file:
     read_file = file.read()
 print(read_file)
 
-#В файле matrix.txt построчно хранится матрица целых чисел A(n,n). Найти два наибольших простых числа.
+#В файле matrx.txt построчно хранится матрица целых чисел A(n,n). Найти два наибольших простых числа.
 # Первое из них заменить минимальным элементом матрицы, а второе - максимальным элементом.
 # Записать полученную матрицу в файл result.txt.
 
-import numpy as np
+with open("/Users/anastasia/Downloads/mtrxs.txt", "r") as my_file:
+  file_contents = my_file.read()
+print(file_contents)
+
+def is_prime(n):
+    d = 2
+    while n % d != 0:
+        d += 1
+    return d == n
